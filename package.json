@@ -12,5 +12,8 @@
     "bunyan": "^1.8.12",
     "manta": "^5.1.0",
     "vasync": "^2.1.0"
+  },
+  "bin": {
+    "tplogger": "./bin/tplogger"
   }
 }
