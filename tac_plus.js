@@ -3,6 +3,7 @@ var path = require('path');
 var bunyan = require('bunyan');
 var logDir = '/var/log'
 var vasync = require('vasync');
+var os = require('os');
 
 // Create the manata clients
 var assert = require('assert');
@@ -75,7 +76,7 @@ function parse(files, cb) {
     logs.push(bunyan.createLogger({ name: file,
       streams: [
         {
-          path: path.join(process.env.TMPDIR,file+'.bunyan')
+          path: path.join(os.tmpdir(),file+'.bunyan')
         }
       ]
     }));
@@ -182,13 +183,14 @@ function createMantaDir(files, cb) {
 function putLogToManta(logs, cb) {
   logs.forEach(function(log, i) {
     var logFile = log.streams[0].path;
+    var hostname = os.hostname().match(/([^\.]*).*/)[1];
     var directory_RE = /.*\..*\.(\d{4})(\d{2})(\d{2})(\d{2})(.*)\..*/
     var matches = logFile.match(directory_RE);
     var year = matches[1];
     var month = matches[2];
     var day = matches[3];
     var hour = matches[4];
-    var filename = matches[5]; // should add hostname infront of this
+    var filename = hostname+'_'+matches[5];
     var mantaDir = '/'+process.env.MANTA_USER+'/stor/'+year+'/'+month+'/'+day+'/'+hour+'/'+filename+'.log';
     var file = fs.createReadStream(logFile,{encoding: 'utf8'})
     client.put(mantaDir, file, { type: 'text/plain' }, function (err) {
