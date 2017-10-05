@@ -1,2 +1,4 @@
 #!/usr/bin/env node
-require('../tac_plus');
+require('../tac_plus').start(function(err) {
+  if(err) return console.error(err);
+});

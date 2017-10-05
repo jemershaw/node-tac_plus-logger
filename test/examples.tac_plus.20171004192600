@@ -1,0 +1,10 @@
+Oct  4 19:25:17	127.0.0.1	testuser	vty0	127.0.0.2	start	task_id=63935	timezone=UTC	service=shell
+Oct  4 19:25:24	127.0.0.1	testuser	vty0	127.0.0.2	stop	task_id=63936	timezone=UTC	service=shell	priv-lvl=15	cmd=show version  <cr>
+Oct  4 19:25:27	127.0.0.1	testuser	vty0	127.0.0.2	stop	task_id=63937	timezone=UTC	service=shell	priv-lvl=15	cmd=show bootvar  <cr>
+Oct  4 19:25:31	127.0.0.1	testuser	vty0	127.0.0.2	stop	task_id=63938	timezone=UTC	service=shell	priv-lvl=15	cmd=dir flash:  <cr>
+Oct  4 19:25:34	127.0.0.1	testuser	vty0	127.0.0.2	stop	task_id=63939	timezone=UTC	service=shell	priv-lvl=15	cmd=dir slot0:  <cr>
+Oct  4 19:25:37	127.0.0.1	testuser	vty0	127.0.0.2	stop	task_id=63940	timezone=UTC	service=shell	priv-lvl=15	cmd=show system  <cr>
+Oct  4 19:25:41	127.0.0.1	testuser	vty0	127.0.0.2	stop	task_id=63941	timezone=UTC	service=shell	priv-lvl=15	cmd=show inventory  <cr>
+Oct  4 19:25:44	127.0.0.1	testuser	vty0	127.0.0.2	stop	task_id=63942	timezone=UTC	service=shell	priv-lvl=15	cmd=show vlan  <cr>
+Oct  4 19:25:48	127.0.0.1	testuser	vty0	127.0.0.2	stop	task_id=63943	timezone=UTC	service=shell	priv-lvl=15	cmd=show running-config  <cr>
+Oct  4 19:25:51	127.0.0.1	testuser	vty0	127.0.0.2	stop	task_id=63935	timezone=UTC	service=shell	disc-cause=6	pre-session-time=8	elapsed_time=42

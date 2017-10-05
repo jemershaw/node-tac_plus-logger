@@ -15,5 +15,8 @@
   },
   "bin": {
     "tplogger": "./bin/tplogger"
+  },
+  "devDependencies": {
+    "tape": "^4.8.0"
   }
 }
