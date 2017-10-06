@@ -167,6 +167,7 @@ function writeLog(file, log, cb) {
   var discCause_RE = /^disc-cause=(.*)$/;
   var preSessionTime_RE = /^pre-session-time=(.*)$/;
   var privLvl_RE= /^priv-lvl=(.*)$/;
+  var TZ = new Date().toString().match(/.*\((.*)\)/)[1];
 
   fs.readFile(file,'utf8', function (err, data) {
     var lines = data.split('\n');
@@ -181,7 +182,7 @@ function writeLog(file, log, cb) {
       fields.forEach(function(field, i) {
         if(i == 0 && field.match(dateRegex)) {
           var match = field.match(dateRegex);
-          lineData.time = new Date(Date.parse(match[2]+" "+match[1]+" "+new Date().getFullYear()+" "+match[3])).toISOString();
+          lineData.time = new Date(Date.parse(match[2]+" "+match[1]+" "+new Date().getFullYear()+" "+match[3]+" "+TZ)).toISOString();
         } else if(i == 1 && ipRegex.test(field)) {
           lineData.device_ip = field;
         } else if(i == 2) {
