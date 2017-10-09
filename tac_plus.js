@@ -101,8 +101,13 @@ function startPipeline(cb) {
       });
     },
     function f5 (args, cb) {
-      putLogToManta(args.client, args.logs, function() {
+      putLogToManta(args.client, args.logs, args.files, function() {
         cb();
+      });
+    },
+    function f6 (args, cb) {
+      deleteOldLogFiles(args.files, function(err) {
+        cb(err);
       });
     }
   ]
@@ -247,7 +252,7 @@ function createMantaDir(client, files, cb) {
   });
 }
 
-function putLogToManta(client, logs, cb) {
+function putLogToManta(client, logs, oFiles, cb) {
   vasync.forEachParallel({
     'func': function(log,cb) {
       var logFile = log.streams[0].path;
@@ -270,7 +275,23 @@ function putLogToManta(client, logs, cb) {
     },
     'inputs': logs
   }, function(err, results) {
+    if(err) return cb(err);
     cb();
+  });
+}
+
+function deleteOldLogFiles(files, cb) {
+  vasync.forEachParallel({
+    'func': function(file, cb) {
+      console.log(path.join(logDir,file));
+      fs.unlink(path.join(logDir,file), function(err) {
+        assert.ifError(err);
+        cb();
+      });
+    },
+    'inputs': files
+  }, function(err, results) {
+    cb(err);
   });
 }
 
